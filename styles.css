@@ -1,0 +1,14 @@
+body{
+    display:flex; 
+    flex-direction:column; 
+    justify-content:center;
+    text-align: center;
+    min-height:100vh;
+    background-color: aquamarine;
+}
+
+.body-container{
+    background-color: white;
+    margin: 0px 0px 0px 60px;
+}
+
