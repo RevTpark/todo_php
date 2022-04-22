@@ -29,7 +29,7 @@
         <div>
             You have 4 pending tasks
         </div>
-        
+        <div id="updateForm"></div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
@@ -89,7 +89,41 @@
 
             })
 
-            
+            $(document).on("click", "#updateTask", function(e){
+                e.preventDefault();
+                $("#updateForm").css({"display": "block"});
+                var id = $(this).data("id");
+                var name = $(this).parent().text().trim();
+                var html = "<input type='text' id='updateTaskName' value='" + name + "'><br><input type='checkbox' id='status'>Task Done?<input type='hidden' id='id' value='"+ id + "'><br><input type='submit' id='updateSubmit'>";
+                $("#updateForm").html(html);
+            })
+
+            $(document).on("click", "#updateSubmit", function(e){
+                e.preventDefault();
+                var title=$("#updateTaskName").val();
+                var status=$("#status").val();
+                var id=$("#id").val();
+
+                $.ajax({
+                    url:"update_task.php",
+                    type:"POST",
+                    data:{
+                        id: id,
+                        taskName: title,
+                        status: status
+                    },
+                    success: function(data){
+                        if(data==1){
+                            // alert("Task Updated Successfully");
+                            $("#updateForm").css({"display":"none"});
+                            loadTasks();
+                        }
+                        else{
+                            alert("Something went wrong. Please try again later.");
+                        }
+                    }
+                })
+            })
         })
     </script>
 </body>

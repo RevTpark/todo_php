@@ -10,7 +10,7 @@ if(mysqli_num_rows($data) > 0){
 
 <li>
     <?php echo $row['title']; ?>
-    <button><i class="fa fa-pencil"></i></button>
+    <button id="updateTask" data-id="<?php echo $row['id']; ?>"><i class="fa fa-pencil"></i></button>
     <button id="deleteTask" data-id="<?php echo $row['id']; ?>"><i class="fa fa-trash"></i></button>
     
 </li>
