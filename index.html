@@ -15,21 +15,22 @@
 <body>
 
     <div class="container body-container">
-        <h2 class="text-dark mb-3 mt-3"> 
+        <h2 class="title-text"> 
             To Do List
         </h2>
-        <div>
-            <input type="text" id="newTaskName" placeholder="Enter task name...">
-            <button id="addTask"><i class="fa fa-plus"></i></button>
+        <div class="mb-3 mt-3">
+            <input type="text" class="add-input" size="40" id="newTaskName" placeholder="Enter task name..." style="vertical-align: middle;">
+            <button class="btn btn-primary" id="addTask"><i class="fa fa-plus"></i></button>
         </div>
         <div>
             <ul id="task-list">
             </ul>
         </div>
-        <div>
+        <div id="updateForm"></div>
+        <div id="pending" class="pending-tasks">
             You have 4 pending tasks
         </div>
-        <div id="updateForm"></div>
+        
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
@@ -41,6 +42,14 @@
                     type:"GET",
                     success: function(data){
                         $("#task-list").html(data);
+                    }
+                })
+
+                $.ajax({
+                    url:"pending_task.php",
+                    type: "GET",
+                    success: function(data){
+                        $("#pending").html(data);
                     }
                 })
             }
@@ -94,14 +103,14 @@
                 $("#updateForm").css({"display": "block"});
                 var id = $(this).data("id");
                 var name = $(this).parent().text().trim();
-                var html = "<input type='text' id='updateTaskName' value='" + name + "'><br><input type='checkbox' id='status'>Task Done?<input type='hidden' id='id' value='"+ id + "'><br><input type='submit' id='updateSubmit'>";
+                var html = "<div class='update-form'><span class='update-title'>Update Task</span><br><input class='update-input' type='text' id='updateTaskName' value='" + name + "'><br><input type='checkbox' id='status'>&nbsp;Task Done?<input type='hidden' id='id' value='"+ id + "'><br><input class='btn btn-primary' type='submit' id='updateSubmit'></div>";
                 $("#updateForm").html(html);
             })
 
             $(document).on("click", "#updateSubmit", function(e){
                 e.preventDefault();
                 var title=$("#updateTaskName").val();
-                var status=$("#status").val();
+                var status=$("#status").is(":checked");
                 var id=$("#id").val();
 
                 $.ajax({

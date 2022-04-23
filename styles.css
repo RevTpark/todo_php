@@ -9,6 +9,74 @@ body{
 
 .body-container{
     background-color: white;
-    margin: 0px 0px 0px 60px;
+    padding: 0px 0px 0px 0px;
+    border-radius: 20px;
 }
 
+ul {
+    list-style-type: none;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.task{
+    border-radius: 25px;
+}
+
+.undone-task{
+    background-color: rgba(255, 0, 0, 0.5);
+    border: 2px rgba(255, 0, 0, 1) solid;
+}
+
+.done-task{
+    background-color: rgba(0, 255, 0, 0.5);
+    border: 2px rgba(0, 255, 0, 1) solid;
+}
+
+.add-input, .update-input{
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+.title-text{
+    padding: 10px 0px 10px 0px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: rgba(128, 128, 128, 0.525);
+}
+
+.pending-tasks{
+    font-size: 20px; 
+    font-weight: 500; 
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    /* background-image: radial-gradient(circle, rgb(128, 128, 128) 30%, rgba(128, 128, 128, 0)); */
+    background-color: rgba(128, 128, 128, 0.525);
+    padding: 5px 0px 10px 0px;
+}
+
+.task-title{
+    padding: 0px 10px 0px 0px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.update-form{
+    padding-bottom: 10px;
+    padding-top: 5px;
+    background-color: rgba(0, 0, 255, 0.304);
+}
+
+.update-form > input{
+    margin-bottom: 15px;
+}
+
+.update-title{
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}

@@ -3,7 +3,7 @@ include 'config.php';
 
 $id = $_POST["id"];
 $taskName = $_POST["taskName"];
-$status = $_POST['status'] == "on"?1:0;
+$status = $_POST['status'] == "true"?1:0;
 
 $query = "UPDATE task SET title='$taskName', done=$status WHERE id=$id";
 
