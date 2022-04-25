@@ -15,32 +15,65 @@
 <body>
 
     <div class="container body-container">
-        <h2 class="title-text"> 
-            To Do List
-        </h2>
-        <div class="mb-3 mt-3">
-            <input type="text" class="add-input" size="40" id="newTaskName" placeholder="Enter task name..." style="vertical-align: middle;">
-            <button class="btn btn-primary" id="addTask"><i class="fa fa-plus"></i></button>
-            <button class="btn btn-secondary" id="searchTask"><i class="fa fa-search"></i></button>
+        <div id="userInfo">
+            <div class="title-text"></div>
+            <div>
+                <div class="fw-bold fs-2">Welcome User</div>
+                <div style="color: grey;">Enter Details to continue</div>
+            </div>
+            <div class="mb-3 mt-3">
+                <span style="font-weight: 500;">Username  </span><input type="text" class="add-input" id="username" placeholder="janeDoe41" style="vertical-align: middle;">
+                <button class="btn btn-primary" id="addUsername">Next</button>
+            </div>
+            <div class="pending-tasks"></div>
         </div>
-        <div class="filter-container">
-            <div class="filter-active" id="allFilter">All</div>
-            <div id="pendingFilter">Pending</div>
-            <div id="doneFilter">Done</div>
-        </div>
-        <div>
-            <ul id="task-list">
-            </ul>
-        </div>
-        <div id="updateForm"></div>
-        <div id="pending" class="pending-tasks">
-            You have 4 pending tasks
+        <div id="toDoList" class="hidden">
+            <h2 class="title-text" id="titleText"> 
+                To Do List
+            </h2>
+            <div class="mb-3 mt-3">
+                <input type="text" class="add-input" size="40" id="newTaskName" placeholder="Enter task name..." style="vertical-align: middle;">
+                <button class="btn btn-primary" id="addTask"><i class="fa fa-plus"></i></button>
+                <button class="btn btn-secondary" id="searchTask"><i class="fa fa-search"></i></button>
+            </div>
+            <div class="filter-container">
+                <div class="filter-active" id="allFilter">All</div>
+                <div id="pendingFilter">Pending</div>
+                <div id="doneFilter">Done</div>
+            </div>
+            <div>
+                <ul id="task-list">
+                </ul>
+            </div>
+            <div id="updateForm"></div>
+            <div id="pending" class="pending-tasks">
+                You have 4 pending tasks
+            </div>
         </div>
         
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function(){
+
+            // Change View 
+            $("#addUsername").on("click", function(e){
+                e.preventDefault();
+
+                let userName = $("#username").val();
+                $.ajax({
+                    url: "user_session.php",
+                    type: "POST",
+                    data: {
+                        username: userName
+                    },
+                    success: function(data){
+                        $("#userInfo").addClass("hidden");
+                        $("#toDoList").removeClass("hidden");
+                        $("#titleText").html(data);
+                    }
+                })
+            })
 
             // Show Tasks
             function loadTasks(){

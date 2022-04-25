@@ -96,5 +96,8 @@ ul {
 
 .filter-active{
     background-color: #34A7C1;
+}
 
+.hidden{
+    display: none;
 }
